@@ -1,0 +1,33 @@
+{
+    "name": "DeveloperControls",
+    "maps": [
+        {
+            "name": "Default",
+            "id": "61ee645b-feb8-4945-9619-7258beaf4da0",
+            "actions": [
+                {
+                    "name": "Toogle Debug Screen",
+                    "type": "Button",
+                    "id": "6f089da9-6643-4343-a641-c11d3e52f075",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "62c1eebc-7a38-425d-9dc2-59938f28db4d",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toogle Debug Screen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

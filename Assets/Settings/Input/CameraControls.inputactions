@@ -1,0 +1,44 @@
+{
+    "name": "CameraControls",
+    "maps": [
+        {
+            "name": "Default",
+            "id": "cc8b602a-0995-4c02-b382-646c965aa356",
+            "actions": [
+                {
+                    "name": "RotateCamera",
+                    "type": "Value",
+                    "id": "65de9d26-46e1-4e8c-a377-2b987d09facc",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0778dd07-f75e-410f-a1cf-16682ee7aba6",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0.15,y=0.15)",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b4477c4-2253-4b18-9959-d7061111e002",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.2,max=0.9),ScaleVector2(x=2.2,y=2.2)",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
