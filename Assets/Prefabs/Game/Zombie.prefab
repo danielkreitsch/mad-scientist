@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ec24c02e2f1d14f9cbcf61dd9ce7fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 30
+  startHealth: 1
   torqueByBulletFactor: 1000
 --- !u!114 &8261111631661212822
 MonoBehaviour:

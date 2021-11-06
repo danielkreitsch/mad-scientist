@@ -44,7 +44,7 @@ namespace GameJam
             
             this.ProcessLookDirection(Mouse.current.position.ReadValue());
             
-            this.ProcessShooting(this.playerControls.Default.Shoot.triggered);
+            this.ProcessShooting(Input.GetMouseButton(0));
         }
 
         private void ProcessMovement(float horizontalInput, float verticalInput)

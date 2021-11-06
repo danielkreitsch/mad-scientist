@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace GameJam
 {
@@ -17,6 +18,9 @@ namespace GameJam
 
         [Inject]
         private GameController gameController;
+
+        [Inject]
+        private PlayerController playerController;
 
         private Zombie zombie;
         private NavMeshAgent navMeshAgent;
@@ -49,7 +53,11 @@ namespace GameJam
                     
                     if (this.gameController.Scientists.Count > 0)
                     {
-                        var target = this.gameController.Scientists.OrderBy(scientist => Vector3.Distance(this.transform.position, scientist.transform.position)).First();
+                        var target = this.playerController.GetComponent<Scientist>();
+                        if (Random.Range(0, 1000) < 500)
+                        {
+                            target = this.gameController.Scientists.OrderBy(scientist => Vector3.Distance(this.transform.position, scientist.transform.position)).First();
+                        }
                         this.zombie.Target = target;
                         this.State = EnemyState.WalkToScientist;
                     }
@@ -75,12 +83,12 @@ namespace GameJam
             }
             else if (this.State == EnemyState.Attack)
             {
-                this.State = EnemyState.Idle;
+                this.State = EnemyState.WalkToScientist;
             }
             
             this.debugScreen.Set("Zombie", "State", this.State.ToString());
 
-            /*int nearZombies = this.gameController.Zombies.Count(zombie => Vector3.Distance(this.transform.position, zombie.transform.position) < 3);
+            int nearZombies = this.gameController.Zombies.Count(zombie => Vector3.Distance(this.transform.position, zombie.transform.position) < 3);
             if (nearZombies < 5)
             {
                 this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, 1);
@@ -106,7 +114,7 @@ namespace GameJam
                 {
                     this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, 0.5f);
                 }
-            }*/
+            }
         }
     }
 }

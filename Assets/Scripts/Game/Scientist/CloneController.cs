@@ -66,9 +66,6 @@ namespace Game.Character
                 }
                 else
                 {
-                    this.navMeshAgent.stoppingDistance = 6;
-                    this.navMeshAgent.SetDestination(this.scientist.ProtectTarget.transform.position);
-
                     var distance = Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z),
                         new Vector2(this.scientist.ProtectTarget.transform.position.x, this.scientist.ProtectTarget.transform.position.z));
 
@@ -83,6 +80,12 @@ namespace Game.Character
                         {
                             this.State = CloneState.Idle;
                         }
+                    }
+
+                    if (distance > 10)
+                    {
+                        this.navMeshAgent.stoppingDistance = 4;
+                        this.navMeshAgent.SetDestination(this.scientist.ProtectTarget.transform.position);
                     }
                 }
 
