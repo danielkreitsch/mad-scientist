@@ -1,4 +1,4 @@
-﻿namespace Menu
+﻿namespace GameJam
 {
     public interface IPausable
     {

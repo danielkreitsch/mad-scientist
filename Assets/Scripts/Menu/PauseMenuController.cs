@@ -3,11 +3,11 @@ using Game;
 using UnityEngine;
 using Zenject;
 
-namespace Menu
+namespace GameJam
 {
     public class PauseMenuController : MonoBehaviour
     {
-        [Inject]
+        /*[Inject]
         private MenuControls menuControls;
 
         [Inject]
@@ -78,6 +78,6 @@ namespace Menu
         {
             this.Pause = false;
             yield return null;
-        }
+        }*/
     }
 }

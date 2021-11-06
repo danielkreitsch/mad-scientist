@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace General
+namespace GameJam
 {
     public class InputHelper : MonoBehaviour
     {

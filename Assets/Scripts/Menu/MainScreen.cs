@@ -1,12 +1,11 @@
 ﻿using System.Linq;
-using General;
 using ModestTree;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utility;
 using Zenject;
 
-namespace Menu
+namespace GameJam
 {
     public class MainScreen : MonoBehaviour
     {

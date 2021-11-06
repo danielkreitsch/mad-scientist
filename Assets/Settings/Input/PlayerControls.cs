@@ -27,20 +27,20 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""ffaa0605-6d88-4067-ba66-da9eae55a1d5"",
-                    ""expectedControlType"": """",
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""3baeee5b-8ae4-46e8-a787-1bec982b1121"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.1,behavior=2)""
+                    ""interactions"": """"
                 },
                 {
-                    ""name"": ""Sprint"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""ae4d6ca4-7f70-4681-bb43-d29fae3290f9"",
-                    ""expectedControlType"": """",
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""6838c884-bc69-4862-8515-c0bc9d87e577"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.1,behavior=2)""
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -123,45 +123,34 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""622d754b-fdf8-49ea-a216-6c08e50e1dd5"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""1ff9a1cb-bfbf-4728-8340-6a85a38ed649"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""738b47db-249c-4736-95d3-02963f19d896"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""7ce419ab-0103-41ab-bb94-e17fc1ce34c8"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2e9165bd-2ec5-4722-8dd2-e454b6f2dfb8"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""id"": ""7e6dbf9b-e229-418e-8d26-41bbc2a657c0"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5b504f40-c81f-4209-9271-9fbded5551d9"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Sprint"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -173,8 +162,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
-        m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
-        m_Default_Sprint = m_Default.FindAction("Sprint", throwIfNotFound: true);
+        m_Default_Shoot = m_Default.FindAction("Shoot", throwIfNotFound: true);
+        m_Default_Interact = m_Default.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,15 +214,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Default;
     private IDefaultActions m_DefaultActionsCallbackInterface;
     private readonly InputAction m_Default_Move;
-    private readonly InputAction m_Default_Jump;
-    private readonly InputAction m_Default_Sprint;
+    private readonly InputAction m_Default_Shoot;
+    private readonly InputAction m_Default_Interact;
     public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
         public DefaultActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Default_Move;
-        public InputAction @Jump => m_Wrapper.m_Default_Jump;
-        public InputAction @Sprint => m_Wrapper.m_Default_Sprint;
+        public InputAction @Shoot => m_Wrapper.m_Default_Shoot;
+        public InputAction @Interact => m_Wrapper.m_Default_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -246,12 +235,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
-                @Sprint.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSprint;
+                @Shoot.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShoot;
+                @Interact.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -259,12 +248,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-                @Sprint.started += instance.OnSprint;
-                @Sprint.performed += instance.OnSprint;
-                @Sprint.canceled += instance.OnSprint;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -272,7 +261,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IDefaultActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

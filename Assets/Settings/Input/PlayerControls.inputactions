@@ -14,20 +14,20 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
-                    "type": "PassThrough",
-                    "id": "ffaa0605-6d88-4067-ba66-da9eae55a1d5",
-                    "expectedControlType": "",
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "3baeee5b-8ae4-46e8-a787-1bec982b1121",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(pressPoint=0.1,behavior=2)"
+                    "interactions": ""
                 },
                 {
-                    "name": "Sprint",
-                    "type": "PassThrough",
-                    "id": "ae4d6ca4-7f70-4681-bb43-d29fae3290f9",
-                    "expectedControlType": "",
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "6838c884-bc69-4862-8515-c0bc9d87e577",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(pressPoint=0.1,behavior=2)"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -110,45 +110,34 @@
                 },
                 {
                     "name": "",
-                    "id": "622d754b-fdf8-49ea-a216-6c08e50e1dd5",
-                    "path": "<Keyboard>/space",
+                    "id": "1ff9a1cb-bfbf-4728-8340-6a85a38ed649",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "738b47db-249c-4736-95d3-02963f19d896",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "7ce419ab-0103-41ab-bb94-e17fc1ce34c8",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2e9165bd-2ec5-4722-8dd2-e454b6f2dfb8",
-                    "path": "<Keyboard>/shift",
+                    "id": "7e6dbf9b-e229-418e-8d26-41bbc2a657c0",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5b504f40-c81f-4209-9271-9fbded5551d9",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

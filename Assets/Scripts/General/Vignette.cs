@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace General
+namespace GameJam
 {
     public class Vignette : MonoBehaviour
     {

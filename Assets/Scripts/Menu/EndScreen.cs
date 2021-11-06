@@ -1,10 +1,9 @@
-using General;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Menu
+namespace GameJam
 {
     public class EndScreen : MonoBehaviour
     {

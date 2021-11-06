@@ -1,8 +1,7 @@
-﻿using General;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-namespace Menu
+namespace GameJam
 {
     public class MainMenuController : MonoBehaviour
     {

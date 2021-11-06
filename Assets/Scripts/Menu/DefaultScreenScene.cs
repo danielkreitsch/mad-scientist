@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Menu
+namespace GameJam
 {
     public class DefaultScreenScene : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace General
+namespace GameJam
 {
     public class MusicPlayer : MonoBehaviour
     {

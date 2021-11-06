@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using Zenject;
 
-namespace Menu
+namespace GameJam
 {
     public class MainScreenOption : MonoBehaviour
     {

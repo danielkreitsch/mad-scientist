@@ -1,10 +1,9 @@
-using General;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-namespace Menu
+namespace GameJam
 {
     public class LeaveButton : MonoBehaviour
     {

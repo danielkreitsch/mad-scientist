@@ -2,7 +2,7 @@ using Development.Debugging;
 using UnityEngine;
 using Zenject;
 
-namespace General
+namespace GameJam
 {
     public class ProjectInstaller : MonoInstaller
     {

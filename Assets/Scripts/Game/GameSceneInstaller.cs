@@ -1,5 +1,4 @@
-using Game.Character;
-using Menu;
+using GameJam;
 using UnityEngine;
 using Zenject;
 

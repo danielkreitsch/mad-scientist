@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-namespace General
+namespace GameJam
 {
     public class ScreenController : MonoBehaviour
     {

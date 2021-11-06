@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Menu
+namespace GameJam
 {
     public class MainMenuCameraController : MonoBehaviour
     {
