@@ -9,7 +9,7 @@ public class Zombie : MonoBehaviour
 {
     [Inject]
     private GameController gameController;
-    
+
     [SerializeField]
     private float startHealth = 10;
 
@@ -17,16 +17,20 @@ public class Zombie : MonoBehaviour
     private float torqueByBulletFactor = 1;
 
     private float health = 0;
+    private float biomass = 0;
 
     public bool IsAlive => this.health > 0;
-    
+
+    public float Biomass => this.biomass;
+
     public Scientist Target { get; set; }
 
     private void Start()
     {
         this.health = this.startHealth;
+        this.biomass = this.health / 10;
     }
-    
+
     private void OnEnable()
     {
         this.gameController.Zombies.Add(this);
@@ -37,12 +41,18 @@ public class Zombie : MonoBehaviour
         this.gameController.Zombies.Remove(this);
     }
 
-    public void ReceiveShootDamage(float damage, Vector3 direction)
+    public void ReceiveShootDamage(float damage, Vector3 direction, Scientist shooter)
     {
         this.health -= damage;
         if (this.IsAlive)
         {
             this.StartCoroutine(this.Blink_Coroutine(0.05f));
+
+            if (shooter.GetComponent<PlayerController>() != null)
+            {
+                this.GetComponent<ZombieController>().Target = shooter;
+                //Debug.Log("Shot by player");
+            }
         }
         else
         {

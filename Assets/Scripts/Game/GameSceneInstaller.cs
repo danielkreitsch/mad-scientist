@@ -18,13 +18,17 @@ namespace Game
         [SerializeField]
         private CameraController cameraController;
 
+        [SerializeField]
+        private Tank tank;
+
         public override void InstallBindings()
         {
             this.Container.BindInstances(
                 this.gameController,
                 this.pauseMenuController,
                 this.playerController,
-                this.cameraController
+                this.cameraController,
+                this.tank
             );
         }
     }

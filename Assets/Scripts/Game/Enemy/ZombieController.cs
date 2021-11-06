@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Development.Debugging;
@@ -22,12 +23,33 @@ namespace GameJam
         [Inject]
         private PlayerController playerController;
 
+        [SerializeField]
+        private Collider attackCollider;
+
+        [SerializeField]
+        private float chaseTimeBeforeSwitching = 10;
+
         private Zombie zombie;
         private NavMeshAgent navMeshAgent;
 
         private float idleTimer = 0;
+        private float decisionTimer = 0;
+        private float chaseTime = 0;
+        private float attackTimer = 0;
+
+        private Scientist closestScientist;
 
         public EnemyState State { get; set; }
+        
+        public Scientist Target
+        {
+            get => this.zombie.Target;
+            set
+            {
+                this.zombie.Target = value;
+                this.chaseTime = 0;
+            }
+        }
 
         private void Awake()
         {
@@ -44,6 +66,22 @@ namespace GameJam
 
         private void Update()
         {
+            if (this.zombie.Target != null)
+            {
+                if (!this.zombie.Target.IsAlive)
+                {
+                    this.zombie.Target = null;
+                    this.State = EnemyState.Idle;
+                }
+            }
+
+            this.decisionTimer += Time.deltaTime;
+            if (this.decisionTimer > 1)
+            {
+                this.decisionTimer = 0;
+                this.closestScientist = this.gameController.Scientists.OrderBy(scientist => Vector3.Distance(this.transform.position, scientist.transform.position)).FirstOrDefault();
+            }
+            
             if (this.State == EnemyState.Idle)
             {
                 this.idleTimer += Time.deltaTime;
@@ -58,32 +96,52 @@ namespace GameJam
                         {
                             target = this.gameController.Scientists.OrderBy(scientist => Vector3.Distance(this.transform.position, scientist.transform.position)).First();
                         }
-                        this.zombie.Target = target;
+                        this.Target = target;
                         this.State = EnemyState.WalkToScientist;
                     }
                 }
             }
             else if (this.State == EnemyState.WalkToScientist)
             {
+                if (this.zombie.Target == null)
+                {
+                    this.State = EnemyState.Idle;
+                    return;
+                }
+                
+                this.attackTimer += Time.deltaTime;
+                
                 this.navMeshAgent.stoppingDistance = 1.1f;
 
                 var distance = Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z),
-                    new Vector2(this.zombie.Target.transform.position.x, this.zombie.Target.transform.position.z));
+                    new Vector2(this.Target.transform.position.x, this.zombie.Target.transform.position.z));
 
                 if (distance < 1.1f)
                 {
+                    this.chaseTime = 0;
                     this.navMeshAgent.isStopped = true;
-                    this.State = EnemyState.Attack;
+
+                    if (this.attackTimer < 2)
+                    {
+                        this.State = EnemyState.Attack;
+                    }
                 }
                 else
                 {
                     this.navMeshAgent.isStopped = false;
                     this.navMeshAgent.SetDestination(this.zombie.Target.transform.position);
+
+                    this.chaseTime += Time.deltaTime;
+                    if (this.chaseTime > this.chaseTimeBeforeSwitching)
+                    {
+                        this.Target = this.closestScientist;
+                    }
                 }
             }
             else if (this.State == EnemyState.Attack)
             {
-                this.State = EnemyState.WalkToScientist;
+                this.attackTimer = 0;
+                this.StartCoroutine(this.Attack_Coroutine());
             }
             
             this.debugScreen.Set("Zombie", "State", this.State.ToString());
@@ -115,6 +173,17 @@ namespace GameJam
                     this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, 0.5f);
                 }
             }
+        }
+
+        private IEnumerator Attack_Coroutine()
+        {
+            this.attackCollider.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(1);
+            
+            this.attackCollider.gameObject.SetActive(false);
+            
+            this.State = EnemyState.WalkToScientist;
         }
     }
 }

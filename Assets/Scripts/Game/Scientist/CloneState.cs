@@ -3,7 +3,7 @@
     public enum CloneState
     {
         Idle,
-        ProtectOtherScientist,
-        ShootEnemy
+        ProtectMyself,
+        ProtectOtherScientist
     }
 }

@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using GameJam;
 using UnityEngine;
+using Utility;
 using Zenject;
+using Random = UnityEngine.Random;
 
 public class Scientist : MonoBehaviour
 {
@@ -30,8 +32,10 @@ public class Scientist : MonoBehaviour
     private float shootCooldown = 0.2f;
 
     private float health = 0;
-    
+
     private float shootTimer;
+    
+    public float Health => this.health;
     
     public bool IsAlive => health > 0;
     
@@ -46,7 +50,10 @@ public class Scientist : MonoBehaviour
 
     private void OnEnable()
     {
-        this.gameController.Scientists.Add(this);
+        this.Invoke(() =>
+        {
+            this.gameController.Scientists.Add(this);
+        }, 0.1f);
     }
 
     private void OnDisable()
@@ -63,8 +70,9 @@ public class Scientist : MonoBehaviour
     {
         if (this.shootTimer >= this.shootCooldown)
         {
-            GameObject bulletObj = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawn.position, this.transform.rotation);
+            GameObject bulletObj = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawn.position, Quaternion.Euler(0, this.transform.eulerAngles.y + Random.Range(-6f, 6f), 0));
             Bullet bullet = bulletObj.GetComponent<Bullet>();
+            bullet.Shooter = this;
             
             this.shootTimer = 0;
         }
@@ -79,6 +87,16 @@ public class Scientist : MonoBehaviour
                 this.transform.LookAt(targetPosition);
                 this.Shoot();
             }
+        }
+    }
+
+    public void ReceiveDamageByAttack(float damage)
+    {
+        this.health -= damage;
+
+        if (this.health <= 0)
+        {
+            this.GetComponent<DeadScientist>().enabled = true;
         }
     }
 }

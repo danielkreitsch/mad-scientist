@@ -15,10 +15,15 @@ namespace GameJam
         
         [Inject]
         private DebugScreen debugScreen;
+
+        [Inject]
+        private GameController gameController;
         
         [Inject]
         private CameraController cameraController;
 
+        [Inject]
+        private Tank tank;
 
         [SerializeField]
         private Scientist scientist;
@@ -45,6 +50,10 @@ namespace GameJam
             this.ProcessLookDirection(Mouse.current.position.ReadValue());
             
             this.ProcessShooting(Input.GetMouseButton(0));
+
+            this.ProcessInteractions(this.playerControls.Default.Interact.triggered);
+            
+            this.debugScreen.Set("Player", "HP", this.scientist.Health);
         }
 
         private void ProcessMovement(float horizontalInput, float verticalInput)
@@ -73,11 +82,23 @@ namespace GameJam
             }
         }
 
-        private void ProcessShooting(bool buttonPressed)
+        private void ProcessShooting(bool buttonPressing)
+        {
+            if (buttonPressing)
+            {
+                this.scientist.Shoot();
+            }
+        }
+        
+        private void ProcessInteractions(bool buttonPressed)
         {
             if (buttonPressed)
             {
-                this.scientist.Shoot();
+                var distanceToTank = Vector3.Distance(this.transform.position, this.tank.transform.position);
+                if (distanceToTank < 3)
+                {
+                    this.tank.OnInteract();
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameJam;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,6 +10,8 @@ public class Bullet : MonoBehaviour
     private float speed;
 
     private bool collisionTriggered = false;
+    
+    public Scientist Shooter { get; set; }
 
     private void Update()
     {
@@ -27,7 +30,7 @@ public class Bullet : MonoBehaviour
             if (other.gameObject.GetComponent<Zombie>())
             {
                 Zombie zombie = other.gameObject.GetComponent<Zombie>();
-                zombie.ReceiveShootDamage(1, this.transform.forward);
+                zombie.ReceiveShootDamage(1, this.transform.forward, this.Shooter);
             }
 
             GameObject.Destroy(this.gameObject);

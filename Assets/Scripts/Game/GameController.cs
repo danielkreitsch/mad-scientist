@@ -1,14 +1,19 @@
 ﻿using System.Collections.Generic;
+using Development.Debugging;
 using UnityEngine;
+using Zenject;
 
 namespace GameJam
 {
     public class GameController : MonoBehaviour
     {
+        [Inject]
+        private DebugScreen debugScreen;
+
         public List<Scientist> Scientists { get; } = new List<Scientist>();
         
         public List<Zombie> Zombies { get; } = new List<Zombie>();
-
+        
         public List<Zombie> GetAttackersOfScientist(Scientist scientist)
         {
             List<Zombie> attackers = new List<Zombie>();
