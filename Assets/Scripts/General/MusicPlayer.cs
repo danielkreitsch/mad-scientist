@@ -1,17 +1,20 @@
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace GameJam
 {
     public class MusicPlayer : MonoBehaviour
     {
-        void Start()
-        {
+        [SerializeField]
+        private AudioMixer audioMixer;
         
-        }
+        [SerializeField]
+        private AudioSource audioSource;
 
-        void Update()
+        private void Start()
         {
-        
+            this.audioSource.Play();
         }
     }
 }

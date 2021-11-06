@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Character;
 using GameJam;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public class DeadScientist : MonoBehaviour
 {
+    [Inject]
+    private GameController gameController;
+    
     private void OnEnable()
     {
         // Deactivate zombie components
@@ -34,9 +39,14 @@ public class DeadScientist : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (this.GetComponent<PlayerController>() != null)
         {
-            this.GetComponent<PlayerController>().enabled = true;
-            GameObject.Destroy(this.GetComponent<Scientist>());
-            this.gameObject.AddComponent<Scientist>();
+            if (this.gameController.Scientists.Count >= 2)
+            {
+                var otherScientist = this.gameController.Scientists.FindAll(s => s != this.GetComponent<Scientist>()).First();
+                GameObject.Instantiate(this.gameController.PlayerPrefab, otherScientist.transform.position, otherScientist.transform.rotation);
+                GameObject.Destroy(otherScientist.gameObject);
+            }
+            
+            GameObject.Destroy(this.gameObject);
         }
         else if (this.GetComponent<CloneController>() != null)
         {

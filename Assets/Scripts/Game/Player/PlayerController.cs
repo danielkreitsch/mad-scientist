@@ -66,10 +66,10 @@ namespace GameJam
             var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
             this.characterController.Move(walkDirection * walkSpeed * Time.deltaTime);
 
-            if (this.transform.position.y > 0)
+            /*if (this.transform.position.y > 0f)
             {
                 this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
-            }
+            }*/
         }
         
         private void ProcessLookDirection(Vector2 mousePosition)

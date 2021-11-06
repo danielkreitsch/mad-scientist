@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 4919942175539740091}
   - component: {fileID: 4919942175539740090}
   - component: {fileID: 4919942175539740085}
+  - component: {fileID: -1515529496308543426}
   - component: {fileID: 4919942175539740084}
   - component: {fileID: 4919942175539740087}
   - component: {fileID: -5057574463380817467}
@@ -242,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6064282c1f5428bbd9a90b964b3fe42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceOptimizationEnabled: 0
 --- !u!114 &4919942175539740085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,13 +257,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  startHealth: 10
+  startHealth: 5
   bulletPrefab: {fileID: 2471105837141327793, guid: a3b4686816fcbce46a51cb5c88b927da, type: 3}
   bulletSpawn: {fileID: 4919942173852144718}
   bulletBlockingLayers:
     serializedVersion: 2
     m_Bits: 1
-  shootCooldown: 0.15
+  shootCooldown: 0.3
+--- !u!114 &-1515529496308543426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919942175539740086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00458c3467a54114b9cafa5bef7ff9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &4919942175539740084
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -285,7 +299,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4919942175539740086}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 0.5
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50

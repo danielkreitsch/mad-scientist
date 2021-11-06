@@ -28,6 +28,16 @@ public class Tank : MonoBehaviour
     [SerializeField]
     private float requiredBiomassForClone = 10;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip cloneSequenceSound;
+    
+    [SerializeField]
+    private AudioClip openDoorSound;
+    
+    [SerializeField]
+    private AudioClip closeDoorSound;
+
     private float _biomass = 0;
     
     private float targetWaterY = 0;
@@ -74,18 +84,27 @@ public class Tank : MonoBehaviour
     {
         if (this.Biomass >= this.requiredBiomassForClone)
         {
-            this.SpawnClone();
+            this.Biomass = 0;
+            this.StartCoroutine(this.SpawnClone_Coroutine());
         }
         else
         {
             Debug.Log("Not enough biomass (*Sound*)");
         }
     }
+    
+    
 
-    private void SpawnClone()
+    private IEnumerator SpawnClone_Coroutine()
     {
-        this.Biomass = 0;
+        var audioSource = this.GetComponent<AudioSource>();
+        
+        audioSource.PlayOneShot(this.cloneSequenceSound);
+        yield return new WaitForSeconds(2.6f);
+        audioSource.PlayOneShot(this.openDoorSound);
+        yield return new WaitForSeconds(2f);
         GameObject.Instantiate(this.clonePrefab, this.cloneSpawn.position, Quaternion.Euler(new Vector3(0, 180, 0)));
-        Debug.Log("Opening door (*Sound*)");
+        yield return new WaitForSeconds(2f);
+        audioSource.PlayOneShot(this.closeDoorSound);
     }
 }

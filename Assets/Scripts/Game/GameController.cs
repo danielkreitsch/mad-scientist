@@ -10,10 +10,15 @@ namespace GameJam
         [Inject]
         private DebugScreen debugScreen;
 
+        [SerializeField]
+        private GameObject playerPrefab;
+
+        public GameObject PlayerPrefab => this.playerPrefab;
+
         public List<Scientist> Scientists { get; } = new List<Scientist>();
         
         public List<Zombie> Zombies { get; } = new List<Zombie>();
-        
+
         public List<Zombie> GetAttackersOfScientist(Scientist scientist)
         {
             List<Zombie> attackers = new List<Zombie>();

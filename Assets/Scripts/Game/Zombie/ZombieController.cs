@@ -20,14 +20,14 @@ namespace GameJam
         [Inject]
         private GameController gameController;
 
-        [Inject]
-        private PlayerController playerController;
-
         [SerializeField]
         private Collider attackCollider;
 
         [SerializeField]
         private float chaseTimeBeforeSwitching = 10;
+        
+        [SerializeField]
+        private bool distanceOptimizationEnabled;
 
         private Zombie zombie;
         private NavMeshAgent navMeshAgent;
@@ -91,10 +91,14 @@ namespace GameJam
                     
                     if (this.gameController.Scientists.Count > 0)
                     {
-                        var target = this.playerController.GetComponent<Scientist>();
-                        if (Random.Range(0, 1000) < 500)
+                        var target = this.closestScientist;
+                        if (Random.Range(0, 1000) > 500)
                         {
-                            target = this.gameController.Scientists.OrderBy(scientist => Vector3.Distance(this.transform.position, scientist.transform.position)).First();
+                            var playerObj = GameObject.FindObjectOfType<PlayerController>();
+                            if (playerObj != null)
+                            {
+                                target = playerObj.GetComponent<Scientist>();
+                            }
                         }
                         this.Target = target;
                         this.State = EnemyState.WalkToScientist;
@@ -116,12 +120,12 @@ namespace GameJam
                 var distance = Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z),
                     new Vector2(this.Target.transform.position.x, this.zombie.Target.transform.position.z));
 
-                if (distance < 1.1f)
+                if (distance < 1.5f)
                 {
                     this.chaseTime = 0;
                     this.navMeshAgent.isStopped = true;
 
-                    if (this.attackTimer < 2)
+                    if (this.attackTimer >= 2)
                     {
                         this.State = EnemyState.Attack;
                     }
@@ -146,31 +150,19 @@ namespace GameJam
             
             this.debugScreen.Set("Zombie", "State", this.State.ToString());
 
-            int nearZombies = this.gameController.Zombies.Count(zombie => Vector3.Distance(this.transform.position, zombie.transform.position) < 3);
-            if (nearZombies < 5)
+            if (this.distanceOptimizationEnabled)
             {
-                this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, 1);
-            }
-            else if (nearZombies < 10)
-            {
-                if (this.navMeshAgent.radius < 0.6f)
+                float optimalDistance = this.GetOptimalDistance();
+                if (!Mathf.Approximately(this.navMeshAgent.radius, optimalDistance))
                 {
-                    this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, 0.6f);
-                }
-                else if (this.navMeshAgent.radius > 0.6f)
-                {
-                    this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, 0.6f);
-                }
-            }
-            else
-            {
-                if (this.navMeshAgent.radius < 0.5f)
-                {
-                    this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, 0.5f);
-                }
-                else if (this.navMeshAgent.radius > 0.5f)
-                {
-                    this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, 0.5f);
+                    if (this.navMeshAgent.radius < optimalDistance)
+                    {
+                        this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, optimalDistance);
+                    }
+                    else if (this.navMeshAgent.radius > optimalDistance)
+                    {
+                        this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, optimalDistance);
+                    }
                 }
             }
         }
@@ -184,6 +176,23 @@ namespace GameJam
             this.attackCollider.gameObject.SetActive(false);
             
             this.State = EnemyState.WalkToScientist;
+        }
+        
+        private float GetOptimalDistance()
+        {
+            int nearZombies = this.gameController.Zombies.Count(zombie => Vector3.Distance(this.transform.position, zombie.transform.position) < 3);
+            if (nearZombies < 5)
+            {
+                return 1;
+            }
+            else if (nearZombies < 10)
+            {
+                return 0.6f;
+            }
+            else
+            {
+                return 0.5f;
+            }
         }
     }
 }

@@ -16,8 +16,8 @@ namespace Game.Character
         [Inject]
         private GameController gameController;
 
-        [Inject]
-        private PlayerController playerController;
+        [SerializeField]
+        private bool distanceOptimizationEnabled;
 
         private Scientist scientist;
         private NavMeshAgent navMeshAgent;
@@ -119,16 +119,19 @@ namespace Game.Character
                 }
             }
 
-            float optimalDistance = this.GetOptimalDistance();
-            if (!Mathf.Approximately(this.navMeshAgent.radius, optimalDistance))
+            if (this.distanceOptimizationEnabled)
             {
-                if (this.navMeshAgent.radius < optimalDistance)
+                float optimalDistance = this.GetOptimalDistance();
+                if (!Mathf.Approximately(this.navMeshAgent.radius, optimalDistance))
                 {
-                    this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, optimalDistance);
-                }
-                else if (this.navMeshAgent.radius > optimalDistance)
-                {
-                    this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, optimalDistance);
+                    if (this.navMeshAgent.radius < optimalDistance)
+                    {
+                        this.navMeshAgent.radius = Mathf.Min(this.navMeshAgent.radius + 0.1f * Time.deltaTime, optimalDistance);
+                    }
+                    else if (this.navMeshAgent.radius > optimalDistance)
+                    {
+                        this.navMeshAgent.radius = Mathf.Max(this.navMeshAgent.radius - 0.1f * Time.deltaTime, optimalDistance);
+                    }
                 }
             }
         }

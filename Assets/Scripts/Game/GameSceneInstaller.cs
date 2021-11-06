@@ -11,10 +11,7 @@ namespace Game
 
         [SerializeField]
         private PauseMenuController pauseMenuController;
-
-        [SerializeField]
-        private PlayerController playerController;
-
+        
         [SerializeField]
         private CameraController cameraController;
 
@@ -26,7 +23,6 @@ namespace Game
             this.Container.BindInstances(
                 this.gameController,
                 this.pauseMenuController,
-                this.playerController,
                 this.cameraController,
                 this.tank
             );

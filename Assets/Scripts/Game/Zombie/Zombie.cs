@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using GameJam;
 using UnityEngine;
+using Utility;
 using Zenject;
 
 public class Zombie : MonoBehaviour
@@ -33,7 +32,10 @@ public class Zombie : MonoBehaviour
 
     private void OnEnable()
     {
-        this.gameController.Zombies.Add(this);
+        this.Invoke(() =>
+        {
+            this.gameController.Zombies.Add(this);
+        }, 0.1f);
     }
 
     private void OnDisable()
