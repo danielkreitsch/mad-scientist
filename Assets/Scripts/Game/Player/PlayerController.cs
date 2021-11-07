@@ -1,13 +1,16 @@
 using Development.Debugging;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.Serialization;
+using Utility;
 using Zenject;
 
 namespace GameJam
 {
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : MonoBehaviour
     {
         [Inject]
@@ -27,18 +30,30 @@ namespace GameJam
 
         [SerializeField]
         private Scientist scientist;
-        
+
         [SerializeField]
         private LayerMask aimLayer;
 
         [SerializeField]
+        private Transform rotatingTransform;
+
+        [SerializeField]
         private float walkSpeed = 5;
-        
-        private CharacterController characterController;
+
+        [Header("Dashing")]
+        [SerializeField]
+        private float dashForce = 10;
+
+        [SerializeField]
+        private float dashDuration = 1;
+
+        private Rigidbody rb;
+
+        private bool dashing = false;
 
         void Awake()
         {
-            this.characterController = this.GetComponent<CharacterController>();
+            this.rb = this.GetComponent<Rigidbody>();
         }
     
         void Update()
@@ -58,17 +73,30 @@ namespace GameJam
 
         private void ProcessMovement(float horizontalInput, float verticalInput)
         {
-            float cameraYAngle = 45;
-            var cosOfCameraAngle = Mathf.Cos(cameraYAngle * Mathf.Deg2Rad);
-            var sinOfCameraAngle = Mathf.Sin(cameraYAngle * Mathf.Deg2Rad);
-            var horizontalInputInWorld = horizontalInput * cosOfCameraAngle + verticalInput * sinOfCameraAngle;
-            var verticalInputInWorld = horizontalInput * -sinOfCameraAngle + verticalInput * cosOfCameraAngle;
-            var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
-            this.characterController.Move(walkDirection * walkSpeed * Time.deltaTime);
-
-            if (this.transform.position.y > 0)
+            if (!this.dashing)
             {
-                this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
+                float cameraYAngle = 45;
+                var cosOfCameraAngle = Mathf.Cos(cameraYAngle * Mathf.Deg2Rad);
+                var sinOfCameraAngle = Mathf.Sin(cameraYAngle * Mathf.Deg2Rad);
+                var horizontalInputInWorld = horizontalInput * cosOfCameraAngle + verticalInput * sinOfCameraAngle;
+                var verticalInputInWorld = horizontalInput * -sinOfCameraAngle + verticalInput * cosOfCameraAngle;
+                var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
+                this.rb.velocity = walkDirection * walkSpeed;
+            }
+
+            if (this.playerControls.Default.Dodge.triggered)
+            {
+                this.rb.velocity = Vector3.zero;
+                this.rb.AddForce(this.rotatingTransform.forward.normalized * this.dashForce, ForceMode.Impulse);
+                this.dashing = true;
+                this.gameObject.layer = LayerMask.NameToLayer("InvincibleScientist");
+                this.GetComponent<NavMeshObstacle>().enabled = false;
+                this.Invoke(() =>
+                {
+                    this.dashing = false;
+                    this.gameObject.layer = LayerMask.NameToLayer("Scientist");
+                    this.GetComponent<NavMeshObstacle>().enabled = true;
+                }, this.dashDuration);
             }
         }
         
@@ -78,7 +106,7 @@ namespace GameJam
             if (Physics.Raycast(ray, out RaycastHit hit, 100, this.aimLayer))
             {
                 var mousePositionInWorld = hit.point;
-                this.transform.LookAt(new Vector3(mousePositionInWorld.x, this.transform.position.y, mousePositionInWorld.z));
+                this.rotatingTransform.LookAt(new Vector3(mousePositionInWorld.x, this.transform.position.y, mousePositionInWorld.z));
             }
         }
 

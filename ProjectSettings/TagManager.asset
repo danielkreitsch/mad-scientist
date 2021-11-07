@@ -20,10 +20,10 @@ TagManager:
   - Bullet
   - Enemy
   - EnemyAttackCollider
-  - 
-  - 
-  - 
-  - 
+  - DeadBody
+  - NotPathBlocking
+  - Tank
+  - InvincibleScientist
   - 
   - 
   - 

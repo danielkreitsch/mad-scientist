@@ -10,10 +10,19 @@ namespace GameJam
         [Inject]
         private DebugScreen debugScreen;
 
+        [SerializeField]
+        private GameObject playerPrefab;
+
+        private float time = 0;
+
+        public GameObject PlayerPrefab => this.playerPrefab;
+
+        public float Time => this.time;
+
         public List<Scientist> Scientists { get; } = new List<Scientist>();
         
         public List<Zombie> Zombies { get; } = new List<Zombie>();
-        
+
         public List<Zombie> GetAttackersOfScientist(Scientist scientist)
         {
             List<Zombie> attackers = new List<Zombie>();
@@ -38,6 +47,11 @@ namespace GameJam
                 }
             }
             return attackers;
+        }
+
+        private void Update()
+        {
+            time += UnityEngine.Time.deltaTime;
         }
     }
 }
