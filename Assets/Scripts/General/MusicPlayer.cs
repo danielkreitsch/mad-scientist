@@ -16,5 +16,10 @@ namespace GameJam
         {
             this.audioSource.Play();
         }
+
+        public void Stop()
+        {
+            this.audioSource.Stop();
+        }
     }
 }

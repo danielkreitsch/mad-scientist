@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Development.Debugging;
 using GameJam;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ using Random = UnityEngine.Random;
 
 public class Scientist : MonoBehaviour
 {
+    [Inject]
+    private DebugScreen debugScreen;
+    
     [Inject]
     private GameController gameController;
 
@@ -47,11 +51,20 @@ public class Scientist : MonoBehaviour
     [SerializeField]
     private float shootCooldown = 0.2f;
 
+    [SerializeField]
+    private AudioClip shootSound;
+    
+    [SerializeField]
+    private AudioClip noAmmoSound;
+
+    private AudioSource audioSource;
+    
     private float health = 0;
     private int ammo = 0;
 
     private float shootTimer = 0;
     private float ammoReloadTimer = 0;
+    private float noAmmoSoundTimer = 0;
 
     public float Health => this.health;
     
@@ -65,6 +78,8 @@ public class Scientist : MonoBehaviour
 
     private void Start()
     {
+        this.audioSource = this.GetComponent<AudioSource>();
+        
         this.health = this.maxHealth;
         this.ammo = this.maxAmmo;
     }
@@ -81,10 +96,11 @@ public class Scientist : MonoBehaviour
     {
         this.gameController.Scientists.Remove(this);
     }
-
+    
     private void Update()
     {
         this.shootTimer += Time.deltaTime;
+        this.noAmmoSoundTimer += Time.deltaTime;
 
         if (this.ammo <= 0)
         {
@@ -97,8 +113,8 @@ public class Scientist : MonoBehaviour
         }
         
         this.healthBarFillImage.fillAmount = this.health / this.maxHealth;
-
-        this.animator.SetFloat("AimAngle", this.AimingAngle - this.rotatingTransform.eulerAngles.y);
+        
+        this.animator.SetFloat("AimAngle", MathUtilty.WrapAngle(this.AimingAngle - this.rotatingTransform.eulerAngles.y, -180, 180));
     }
 
     public void Shoot()
@@ -109,6 +125,11 @@ public class Scientist : MonoBehaviour
             
             if (this.ammo <= 0)
             {
+                if (this.noAmmoSoundTimer > 3)
+                {
+                    this.noAmmoSoundTimer = 0;
+                    this.audioSource.PlayOneShot(this.noAmmoSound);
+                }
                 return;
             }
             
@@ -117,6 +138,8 @@ public class Scientist : MonoBehaviour
             bullet.Shooter = this;
 
             this.ammo--;
+            
+            this.audioSource.PlayOneShot(this.shootSound);
         }
     }
 
@@ -126,7 +149,8 @@ public class Scientist : MonoBehaviour
         {
             if (!Physics.Raycast(this.transform.position, (this.AttackTarget.transform.position - this.transform.position).normalized, Vector3.Distance(this.transform.position, this.AttackTarget.transform.position), this.bulletBlockingLayers))
             {
-                this.rotatingTransform.LookAt(targetPosition);
+                this.AimingAngle = Vector3.SignedAngle(Vector3.forward, new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z) - this.transform.position, Vector3.up);
+                //this.rotatingTransform.LookAt(targetPosition);
                 this.Shoot();
             }
         }

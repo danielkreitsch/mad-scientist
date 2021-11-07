@@ -137,6 +137,8 @@ namespace Game.Character
                     }
                 }
             }
+
+            this.rotatingTransform.rotation = Quaternion.LookRotation(this.navMeshAgent.velocity);
         }
 
         private float GetOptimalDistance()

@@ -4,6 +4,17 @@ namespace Utility
 {
     public static class MathUtilty
     {
+        public static float WrapAngle(float value, float min, float max)
+        {
+            max -= min;
+            if (max == 0)
+            {
+                return min;
+            }
+
+            return value - max * Mathf.Floor((value - min) / max);
+        }
+
         public static Vector3 SmoothDampEuler(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime)
         {
             return new Vector3(
