@@ -22,8 +22,8 @@ TagManager:
   - EnemyAttackCollider
   - DeadBody
   - NotPathBlocking
-  - 
-  - 
+  - Tank
+  - InvincibleScientist
   - 
   - 
   - 

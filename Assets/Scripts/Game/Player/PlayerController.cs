@@ -1,8 +1,11 @@
 using Development.Debugging;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.Serialization;
+using Utility;
 using Zenject;
 
 namespace GameJam
@@ -37,7 +40,16 @@ namespace GameJam
         [SerializeField]
         private float walkSpeed = 5;
 
+        [Header("Dashing")]
+        [SerializeField]
+        private float dashForce = 10;
+
+        [SerializeField]
+        private float dashDuration = 1;
+
         private Rigidbody rb;
+
+        private bool dashing = false;
 
         void Awake()
         {
@@ -61,18 +73,31 @@ namespace GameJam
 
         private void ProcessMovement(float horizontalInput, float verticalInput)
         {
-            float cameraYAngle = 45;
-            var cosOfCameraAngle = Mathf.Cos(cameraYAngle * Mathf.Deg2Rad);
-            var sinOfCameraAngle = Mathf.Sin(cameraYAngle * Mathf.Deg2Rad);
-            var horizontalInputInWorld = horizontalInput * cosOfCameraAngle + verticalInput * sinOfCameraAngle;
-            var verticalInputInWorld = horizontalInput * -sinOfCameraAngle + verticalInput * cosOfCameraAngle;
-            var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
-            this.rb.velocity = walkDirection * walkSpeed;
-
-            /*if (this.transform.position.y > 0f)
+            if (!this.dashing)
             {
-                this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
-            }*/
+                float cameraYAngle = 45;
+                var cosOfCameraAngle = Mathf.Cos(cameraYAngle * Mathf.Deg2Rad);
+                var sinOfCameraAngle = Mathf.Sin(cameraYAngle * Mathf.Deg2Rad);
+                var horizontalInputInWorld = horizontalInput * cosOfCameraAngle + verticalInput * sinOfCameraAngle;
+                var verticalInputInWorld = horizontalInput * -sinOfCameraAngle + verticalInput * cosOfCameraAngle;
+                var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
+                this.rb.velocity = walkDirection * walkSpeed;
+            }
+
+            if (this.playerControls.Default.Dodge.triggered)
+            {
+                this.rb.velocity = Vector3.zero;
+                this.rb.AddForce(this.rotatingTransform.forward.normalized * this.dashForce, ForceMode.Impulse);
+                this.dashing = true;
+                this.gameObject.layer = LayerMask.NameToLayer("InvincibleScientist");
+                this.GetComponent<NavMeshObstacle>().enabled = false;
+                this.Invoke(() =>
+                {
+                    this.dashing = false;
+                    this.gameObject.layer = LayerMask.NameToLayer("Scientist");
+                    this.GetComponent<NavMeshObstacle>().enabled = true;
+                }, this.dashDuration);
+            }
         }
         
         private void ProcessLookDirection(Vector2 mousePosition)

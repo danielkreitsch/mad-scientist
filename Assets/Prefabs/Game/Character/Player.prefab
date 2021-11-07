@@ -453,6 +453,8 @@ MonoBehaviour:
     m_Bits: 2048
   rotatingTransform: {fileID: 1696416451753878228}
   walkSpeed: 4
+  dashForce: 5
+  dashDuration: 0.5
 --- !u!114 &3786117728502693000
 MonoBehaviour:
   m_ObjectHideFlags: 0

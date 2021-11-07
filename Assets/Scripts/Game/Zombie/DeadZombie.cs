@@ -10,6 +10,9 @@ namespace GameJam
     {
         [Inject]
         private Tank tank;
+
+        [SerializeField]
+        private GameObject biomassPrefab;
         
         private void OnEnable()
         {
@@ -25,16 +28,21 @@ namespace GameJam
             this.GetComponent<Rigidbody>().isKinematic = false;
             this.GetComponent<CapsuleCollider>().height *= 0.9f;
             this.GetComponent<CapsuleCollider>().radius *= 0.9f;
-            
-            // Add biomass
-            this.tank.AddBiomass(this.GetComponent<Zombie>().Biomass);
-            
-            this.StartCoroutine(this.Despawn_Coroutine(3));
+
+            this.StartCoroutine(this.Despawn_Coroutine());
         }
 
-        private IEnumerator Despawn_Coroutine(float delay)
+        private IEnumerator Despawn_Coroutine()
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(1.5f);
+
+            if (!this.tank.IsFull)
+            {
+                GameObject biomassObj = GameObject.Instantiate(this.biomassPrefab, this.transform.position, Quaternion.identity);
+                biomassObj.GetComponent<FlyingBiomass>().Amount = this.GetComponent<Zombie>().Biomass;
+            }
+
+            yield return new WaitForSeconds(5f);
             GameObject.Destroy(this.gameObject);
         }
     }

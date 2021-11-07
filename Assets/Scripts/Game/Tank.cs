@@ -57,6 +57,8 @@ public class Tank : MonoBehaviour
     }
 
     public float RequiredBiomassForClone => this.requiredBiomassForClone;
+    
+    public bool IsFull => this.Biomass >= this.RequiredBiomassForClone;
 
     private void Update()
     {

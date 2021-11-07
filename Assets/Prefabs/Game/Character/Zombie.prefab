@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0e39bbd3e944d4a392718cb0dfd659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  biomassPrefab: {fileID: 7204716404043089327, guid: 482f31d7d51e3d14a90d8c6085255896, type: 3}
 --- !u!114 &9202643275369591278
 MonoBehaviour:
   m_ObjectHideFlags: 0
