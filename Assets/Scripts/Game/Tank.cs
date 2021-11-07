@@ -14,6 +14,9 @@ public class Tank : MonoBehaviour
     private Transform waterTransform;
     
     [SerializeField]
+    private Transform brightWaterTransform;
+    
+    [SerializeField]
     private float maxWaterHeight = 2;
 
     [SerializeField]
@@ -71,6 +74,7 @@ public class Tank : MonoBehaviour
             if (this.Biomass >= this.requiredBiomassForClone)
             {
                 this.Biomass = this.requiredBiomassForClone;
+                this.brightWaterTransform.gameObject.SetActive(true);
                 Debug.Log("A new clone is waiting (Voice?)");
             }
         }
@@ -99,12 +103,14 @@ public class Tank : MonoBehaviour
     {
         var audioSource = this.GetComponent<AudioSource>();
         
+        this.brightWaterTransform.gameObject.SetActive(false);
+
         audioSource.PlayOneShot(this.cloneSequenceSound);
-        yield return new WaitForSeconds(2.6f);
+        yield return new WaitForSeconds(2f);
         audioSource.PlayOneShot(this.openDoorSound);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         GameObject.Instantiate(this.clonePrefab, this.cloneSpawn.position, Quaternion.Euler(new Vector3(0, 180, 0)));
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         audioSource.PlayOneShot(this.closeDoorSound);
     }
 }

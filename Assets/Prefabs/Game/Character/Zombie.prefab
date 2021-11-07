@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatingTransform: {fileID: 8852414208663182583}
   healthBarFillImage: {fileID: 2120549847958666300}
-  maxHealth: 10
+  maxHealth: 8
   torqueByBulletFactor: 5
 --- !u!114 &8261111631661212822
 MonoBehaviour:

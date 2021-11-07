@@ -3,7 +3,22 @@ guid: c7ed6f8df077b4e4bb0fa6c50650c5b7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cables.006
+    second: {fileID: 2100000, guid: c0cf81a51a2ba62469088e76d2d53d9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tank-nonglass.011
+    second: {fileID: 2100000, guid: cf18eac326ad6014fbc02b6b7f1d9c50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tank-nonglass.012
+    second: {fileID: 2100000, guid: cf18eac326ad6014fbc02b6b7f1d9c50, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -45,7 +60,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace GameJam
 {
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : MonoBehaviour
     {
         [Inject]
@@ -37,11 +37,11 @@ namespace GameJam
         [SerializeField]
         private float walkSpeed = 5;
 
-        private CharacterController characterController;
+        private Rigidbody rb;
 
         void Awake()
         {
-            this.characterController = this.GetComponent<CharacterController>();
+            this.rb = this.GetComponent<Rigidbody>();
         }
     
         void Update()
@@ -67,7 +67,7 @@ namespace GameJam
             var horizontalInputInWorld = horizontalInput * cosOfCameraAngle + verticalInput * sinOfCameraAngle;
             var verticalInputInWorld = horizontalInput * -sinOfCameraAngle + verticalInput * cosOfCameraAngle;
             var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
-            this.characterController.Move(walkDirection * walkSpeed * Time.deltaTime);
+            this.rb.velocity = walkDirection * walkSpeed;
 
             /*if (this.transform.position.y > 0f)
             {

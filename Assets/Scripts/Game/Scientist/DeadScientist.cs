@@ -25,11 +25,14 @@ public class DeadScientist : MonoBehaviour
             this.GetComponent<NavMeshAgent>().enabled = false;
         }
         
+        // Change layer
+        this.gameObject.layer = LayerMask.NameToLayer("DeadBody");
+        
         // Later: Turn into ragdoll
-        /*this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         this.GetComponent<Rigidbody>().isKinematic = false;
         this.GetComponent<CapsuleCollider>().height *= 0.9f;
-        this.GetComponent<CapsuleCollider>().radius *= 0.9f;*/
+        this.GetComponent<CapsuleCollider>().radius *= 0.9f;
 
         this.StartCoroutine(this.Despawn_Coroutine(3));
     }
