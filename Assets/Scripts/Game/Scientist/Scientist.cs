@@ -60,6 +60,8 @@ public class Scientist : MonoBehaviour
     public Scientist ProtectTarget { get; set; }
 
     public Zombie AttackTarget { get; set; }
+    
+    public float AimingAngle { get; set; }
 
     private void Start()
     {
@@ -108,7 +110,7 @@ public class Scientist : MonoBehaviour
                 return;
             }
             
-            GameObject bulletObj = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawn.position, Quaternion.Euler(0, this.rotatingTransform.eulerAngles.y + Random.Range(-6f, 6f), 0));
+            GameObject bulletObj = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawn.position, Quaternion.Euler(0, this.AimingAngle + Random.Range(-6f, 6f), 0));
             Bullet bullet = bulletObj.GetComponent<Bullet>();
             bullet.Shooter = this;
 
