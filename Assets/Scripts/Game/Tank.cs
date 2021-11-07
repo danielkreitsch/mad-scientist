@@ -41,6 +41,9 @@ public class Tank : MonoBehaviour
     [SerializeField]
     private AudioClip closeDoorSound;
 
+    [SerializeField]
+    private AudioClip notEnoughBiomassSound;
+
     private float _biomass = 0;
     
     private float targetWaterY = 0;
@@ -95,7 +98,7 @@ public class Tank : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough biomass (*Sound*)");
+            this.GetComponent<AudioSource>().PlayOneShot(this.notEnoughBiomassSound);
         }
     }
     

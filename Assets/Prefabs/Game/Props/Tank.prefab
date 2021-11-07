@@ -372,6 +372,7 @@ MonoBehaviour:
   cloneSequenceSound: {fileID: 8300000, guid: c80af68b04102f9469a9cccc957b9044, type: 3}
   openDoorSound: {fileID: 8300000, guid: 14c33a9484266a24c877122889cbdef1, type: 3}
   closeDoorSound: {fileID: 8300000, guid: 6567cbf0d2e3c5349ac00c494fd801f5, type: 3}
+  notEnoughBiomassSound: {fileID: 8300000, guid: 095c5863cf534b144bdd6b67a7576e4d, type: 3}
 --- !u!82 &2297266594476499140
 AudioSource:
   m_ObjectHideFlags: 0

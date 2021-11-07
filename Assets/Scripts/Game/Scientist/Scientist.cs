@@ -47,11 +47,20 @@ public class Scientist : MonoBehaviour
     [SerializeField]
     private float shootCooldown = 0.2f;
 
+    [SerializeField]
+    private AudioClip shootSound;
+    
+    [SerializeField]
+    private AudioClip noAmmoSound;
+
+    private AudioSource audioSource;
+    
     private float health = 0;
     private int ammo = 0;
 
     private float shootTimer = 0;
     private float ammoReloadTimer = 0;
+    private float noAmmoSoundTimer = 0;
 
     public float Health => this.health;
     
@@ -65,6 +74,8 @@ public class Scientist : MonoBehaviour
 
     private void Start()
     {
+        this.audioSource = this.GetComponent<AudioSource>();
+        
         this.health = this.maxHealth;
         this.ammo = this.maxAmmo;
     }
@@ -85,6 +96,7 @@ public class Scientist : MonoBehaviour
     private void Update()
     {
         this.shootTimer += Time.deltaTime;
+        this.noAmmoSoundTimer += Time.deltaTime;
 
         if (this.ammo <= 0)
         {
@@ -109,6 +121,11 @@ public class Scientist : MonoBehaviour
             
             if (this.ammo <= 0)
             {
+                if (this.noAmmoSoundTimer > 3)
+                {
+                    this.noAmmoSoundTimer = 0;
+                    this.audioSource.PlayOneShot(this.noAmmoSound);
+                }
                 return;
             }
             
@@ -117,6 +134,8 @@ public class Scientist : MonoBehaviour
             bullet.Shooter = this;
 
             this.ammo--;
+            
+            this.audioSource.PlayOneShot(this.shootSound);
         }
     }
 

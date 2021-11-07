@@ -73,7 +73,7 @@ namespace GameJam
 
         private void ProcessMovement(float horizontalInput, float verticalInput)
         {
-            if (!this.dashing)
+            if (!this.dashing && (!Mathf.Approximately(horizontalInput, 0) || !Mathf.Approximately(verticalInput, 0)))
             {
                 float cameraYAngle = 45;
                 var cosOfCameraAngle = Mathf.Cos(cameraYAngle * Mathf.Deg2Rad);
@@ -83,6 +83,10 @@ namespace GameJam
                 var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
                 this.rb.velocity = walkDirection * walkSpeed;
                 this.rotatingTransform.rotation = Quaternion.LookRotation(walkDirection);
+            }
+            else
+            {
+                this.rb.velocity -= this.rb.velocity * 10 * Time.deltaTime;
             }
 
             if (this.playerControls.Default.Dodge.triggered)

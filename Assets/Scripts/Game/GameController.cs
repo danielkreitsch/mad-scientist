@@ -10,8 +10,14 @@ namespace GameJam
         [Inject]
         private DebugScreen debugScreen;
 
+        [Inject]
+        private MusicPlayer musicPlayer;
+
         [SerializeField]
         private GameObject playerPrefab;
+
+        [SerializeField]
+        private AudioClip gameOverSound;
 
         private float time = 0;
 
@@ -52,6 +58,12 @@ namespace GameJam
         private void Update()
         {
             time += UnityEngine.Time.deltaTime;
+
+            if (time > 3 && this.Scientists.Count == 0)
+            {
+                this.musicPlayer.Stop();
+                this.GetComponent<AudioSource>().PlayOneShot(this.gameOverSound);   
+            }
         }
     }
 }
