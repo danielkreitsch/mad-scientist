@@ -252,7 +252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
   m_sharedMaterial: {fileID: -7046006204846478257, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
   m_sharedMaterial: {fileID: -7046006204846478257, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
@@ -715,7 +715,7 @@ MonoBehaviour:
   inputHelper: {fileID: 7907490299687651499}
   screenController: {fileID: 7789471469623794992}
   musicPlayer: {fileID: 4349501933297981808}
-  debugMode: 1
+  debugMode: 0
 --- !u!1 &7571943329796431598
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +841,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Toggle Trigger
       m_Flags: 0
-  activeAtStart: 1
+  activeAtStart: 0
   leftLabel: {fileID: 7897955034446320971}
   rightLabel: {fileID: 455025999982636395}
 --- !u!1 &7953446012131716428

@@ -24,6 +24,9 @@ public class Scientist : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
+    private GameObject healthBarObject;
+    
+    [SerializeField]
     private Image healthBarFillImage;
     
     [SerializeField]
@@ -160,10 +163,18 @@ public class Scientist : MonoBehaviour
     {
         this.health -= damage;
 
-        if (this.health <= 0)
+        if (this.health > 0)
+        {
+            if (!this.healthBarObject.activeInHierarchy)
+            {
+                this.healthBarObject.SetActive(true);
+            }
+        }
+        else
         {
             this.GetComponent<DeadScientist>().enabled = true;
-            this.healthBarFillImage.transform.parent.gameObject.SetActive(false);
+            this.healthBarObject.SetActive(false);
+            this.GetComponentInChildren<Animator>().enabled = false;
         }
     }
 }

@@ -4,6 +4,7 @@ using Game.Player;
 using GameJam;
 using UnityEngine;
 using UnityEngine.AI;
+using Utility;
 using Zenject;
 
 namespace Game.Character
@@ -22,10 +23,15 @@ namespace Game.Character
         [SerializeField]
         private bool distanceOptimizationEnabled;
 
+        [SerializeField]
+        private float rotationInterpolationTime = 1;
+
         private Scientist scientist;
         private NavMeshAgent navMeshAgent;
 
         private float decisionTimer = 0;
+        
+        private Vector3 rotationVelocity;
 
         public CloneState State { get; set; }
 
@@ -138,7 +144,10 @@ namespace Game.Character
                 }
             }
 
-            this.rotatingTransform.rotation = Quaternion.LookRotation(this.navMeshAgent.velocity);
+            if (this.navMeshAgent.velocity.magnitude > 0)
+            {
+                this.rotatingTransform.rotation = MathUtilty.SmoothDampQuaternion(this.rotatingTransform.rotation, Quaternion.LookRotation(this.navMeshAgent.velocity), ref this.rotationVelocity, this.rotationInterpolationTime);
+            }
         }
 
         private float GetOptimalDistance()

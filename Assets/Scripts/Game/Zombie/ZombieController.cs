@@ -7,6 +7,7 @@ using Game.Character;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Utility;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -21,6 +22,9 @@ namespace GameJam
         private GameController gameController;
 
         [SerializeField]
+        private Transform rotatingTransform;
+
+        [SerializeField]
         private Collider attackCollider;
 
         [SerializeField]
@@ -28,6 +32,9 @@ namespace GameJam
         
         [SerializeField]
         private bool distanceOptimizationEnabled;
+        
+        [SerializeField]
+        private float rotationInterpolationTime = 1;
 
         private Zombie zombie;
         private NavMeshAgent navMeshAgent;
@@ -38,6 +45,8 @@ namespace GameJam
         private float attackTimer = 0;
 
         private Scientist closestScientist;
+        
+        private Vector3 rotationVelocity;
 
         public EnemyState State { get; set; }
         
@@ -147,7 +156,12 @@ namespace GameJam
                 this.attackTimer = 0;
                 this.StartCoroutine(this.Attack_Coroutine());
             }
-            
+
+            if (this.navMeshAgent.velocity.magnitude > 0)
+            {
+                this.rotatingTransform.rotation = MathUtilty.SmoothDampQuaternion(this.rotatingTransform.rotation, Quaternion.LookRotation(this.navMeshAgent.velocity), ref this.rotationVelocity, this.rotationInterpolationTime);
+            }
+
             this.debugScreen.Set("Zombie", "State", this.State.ToString());
 
             if (this.distanceOptimizationEnabled)

@@ -67,7 +67,7 @@ namespace GameJam
             
             time += UnityEngine.Time.deltaTime;
 
-            if (time > 3 && this.Scientists.Count == 0)
+            if (time > 3 && this.Scientists.Count == 0 && GameObject.FindObjectOfType<Scientist>() == null)
             {
                 this.gameOver = true;
                 this.StartCoroutine(this.GameOver_Coroutine());

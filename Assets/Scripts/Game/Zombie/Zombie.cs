@@ -15,6 +15,9 @@ public class Zombie : MonoBehaviour
     private Transform rotatingTransform;
 
     [SerializeField]
+    private GameObject healthBarObject;
+
+    [SerializeField]
     private Image healthBarFillImage;
     
     [SerializeField]
@@ -61,6 +64,11 @@ public class Zombie : MonoBehaviour
         this.health -= damage;
         if (this.IsAlive)
         {
+            if (!this.healthBarObject.activeInHierarchy)
+            {
+                this.healthBarObject.SetActive(true);
+            }
+            
             this.StartCoroutine(this.Blink_Coroutine(0.05f));
 
             if (shooter.GetComponent<PlayerController>() != null)
@@ -72,8 +80,9 @@ public class Zombie : MonoBehaviour
         else
         {
             this.GetComponent<DeadZombie>().enabled = true;
-            this.healthBarFillImage.transform.parent.gameObject.SetActive(false);
+            this.healthBarObject.SetActive(false);
             this.GetComponent<Rigidbody>().AddTorque(direction * torqueByBulletFactor);
+            this.GetComponentInChildren<Animator>().enabled = false;
         }
     }
 
