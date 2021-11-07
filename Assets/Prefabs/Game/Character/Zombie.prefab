@@ -667,3 +667,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4110673883325417091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5522565507535190945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ac2aff8a937864ab5310c5598cfa60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyewhite: {fileID: 2100000, guid: 9592f25ad0a0e6542bc125fe64bfc686, type: 2}
+  flesh: {fileID: 2100000, guid: de5ee5ffc1aec4440af59fab36249b62, type: 2}
+  skinColors:
+  - {fileID: 2100000, guid: b2523de69a2392241ac5bdde4df73588, type: 2}
+  - {fileID: 2100000, guid: 545b3576da4324f4a820001811c7be14, type: 2}
+  - {fileID: 2100000, guid: cd5b56bddac05dc4e8d3073669cd174e, type: 2}
+  - {fileID: 2100000, guid: e4909f6ccdd38ab4e98f29331bba3c2f, type: 2}
+  coatColors:
+  - {fileID: 2100000, guid: 7a01a01f7f9174f4aab442b119af76fd, type: 2}
+  - {fileID: 2100000, guid: 88d55d23c1df96a49af4edcb056d12f4, type: 2}
+  - {fileID: 2100000, guid: e8b5c86ee21fa444180d030de19d229c, type: 2}
+  shirtColors:
+  - {fileID: 2100000, guid: aadb85fb118e5a04aa951f4b8fa61038, type: 2}
+  - {fileID: 2100000, guid: 1d090a27aa56573479b9128635a7ce28, type: 2}
+  - {fileID: 2100000, guid: f5e6d313936b50e49acc0381b4f3115c, type: 2}
+  - {fileID: 2100000, guid: 8a55af6102efae44d9e0461f5d956d3b, type: 2}
+  - {fileID: 2100000, guid: 9b624db9992245143ad699d46755756c, type: 2}
+  pantsColors:
+  - {fileID: 2100000, guid: 4454fcc813d890b46ab2893a45bfb8ec, type: 2}
+  - {fileID: 2100000, guid: ecb685539f2f51546a03f880fa3bab54, type: 2}
+  - {fileID: 2100000, guid: 8eae4f7e775769b42921f5dcb893631e, type: 2}
+  shoesColors:
+  - {fileID: 2100000, guid: 1ee3265c9bfda4747a1160b8fd4d716c, type: 2}
+  - {fileID: 2100000, guid: ab4d2092d3a97a94981b6dd9c7cb0136, type: 2}
+  - {fileID: 2100000, guid: be67c570470166b419926569db5adc2f, type: 2}
