@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Development.Debugging;
 using GameJam;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ using Random = UnityEngine.Random;
 
 public class Scientist : MonoBehaviour
 {
+    [Inject]
+    private DebugScreen debugScreen;
+    
     [Inject]
     private GameController gameController;
 
@@ -92,7 +96,7 @@ public class Scientist : MonoBehaviour
     {
         this.gameController.Scientists.Remove(this);
     }
-
+    
     private void Update()
     {
         this.shootTimer += Time.deltaTime;
@@ -109,8 +113,8 @@ public class Scientist : MonoBehaviour
         }
         
         this.healthBarFillImage.fillAmount = this.health / this.maxHealth;
-
-        this.animator.SetFloat("AimAngle", this.AimingAngle - this.rotatingTransform.eulerAngles.y);
+        
+        this.animator.SetFloat("AimAngle", MathUtilty.WrapAngle(this.AimingAngle - this.rotatingTransform.eulerAngles.y, -180, 180));
     }
 
     public void Shoot()

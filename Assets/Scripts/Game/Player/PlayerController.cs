@@ -67,8 +67,6 @@ namespace GameJam
             this.ProcessShooting(Input.GetMouseButton(0));
 
             this.ProcessInteractions(this.playerControls.Default.Interact.triggered);
-            
-            this.debugScreen.Set("Player", "HP", this.scientist.Health);
         }
 
         private void ProcessMovement(float horizontalInput, float verticalInput)
