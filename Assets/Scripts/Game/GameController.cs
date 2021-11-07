@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Development.Debugging;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace GameJam
@@ -20,6 +22,7 @@ namespace GameJam
         private AudioClip gameOverSound;
 
         private float time = 0;
+        private bool gameOver = false;
 
         public GameObject PlayerPrefab => this.playerPrefab;
 
@@ -57,13 +60,26 @@ namespace GameJam
 
         private void Update()
         {
+            if (this.gameOver)
+            {
+                return;
+            }
+            
             time += UnityEngine.Time.deltaTime;
 
             if (time > 3 && this.Scientists.Count == 0)
             {
-                this.musicPlayer.Stop();
-                this.GetComponent<AudioSource>().PlayOneShot(this.gameOverSound);   
+                this.gameOver = true;
+                this.StartCoroutine(this.GameOver_Coroutine());
             }
+        }
+
+        private IEnumerator GameOver_Coroutine()
+        {
+            this.musicPlayer.Stop();
+            this.GetComponent<AudioSource>().PlayOneShot(this.gameOverSound);
+            yield return new WaitForSeconds(5);
+            SceneManager.LoadScene(0);
         }
     }
 }
