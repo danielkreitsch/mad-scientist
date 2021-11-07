@@ -124,7 +124,7 @@ namespace GameJam
                 
                 this.attackTimer += Time.deltaTime;
                 
-                this.navMeshAgent.stoppingDistance = 1.1f;
+                //this.navMeshAgent.stoppingDistance = 1.1f;
 
                 var distance = Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z),
                     new Vector2(this.Target.transform.position.x, this.zombie.Target.transform.position.z));
@@ -134,7 +134,7 @@ namespace GameJam
                     this.chaseTime = 0;
                     this.navMeshAgent.isStopped = true;
 
-                    if (this.attackTimer >= 2)
+                    if (this.attackTimer >= 0.1f)
                     {
                         this.State = EnemyState.Attack;
                     }
@@ -159,7 +159,12 @@ namespace GameJam
 
             if (this.navMeshAgent.velocity.magnitude > 0)
             {
-                this.rotatingTransform.rotation = MathUtilty.SmoothDampQuaternion(this.rotatingTransform.rotation, Quaternion.LookRotation(this.navMeshAgent.velocity), ref this.rotationVelocity, this.rotationInterpolationTime);
+                var lookDirection = this.navMeshAgent.velocity;
+                if (this.Target != null && this.navMeshAgent.velocity.magnitude < 0.3f)
+                {
+                    lookDirection = this.Target.transform.position - this.transform.position;
+                }
+                this.rotatingTransform.rotation = MathUtilty.SmoothDampQuaternion(this.rotatingTransform.rotation, Quaternion.LookRotation(lookDirection), ref this.rotationVelocity, this.rotationInterpolationTime);
             }
 
             this.debugScreen.Set("Zombie", "State", this.State.ToString());
@@ -185,7 +190,7 @@ namespace GameJam
         {
             this.attackCollider.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
             
             this.attackCollider.gameObject.SetActive(false);
             

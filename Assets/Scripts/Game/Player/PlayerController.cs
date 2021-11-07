@@ -90,7 +90,7 @@ namespace GameJam
             if (this.playerControls.Default.Dodge.triggered)
             {
                 this.rb.velocity = Vector3.zero;
-                this.rb.AddForce(this.rotatingTransform.forward.normalized * this.dashForce, ForceMode.Impulse);
+                this.rb.AddForce(new Vector3(0, this.scientist.AimingAngle, 0) * this.dashForce, ForceMode.Impulse);
                 this.dashing = true;
                 this.gameObject.layer = LayerMask.NameToLayer("InvincibleScientist");
                 this.GetComponent<NavMeshObstacle>().enabled = false;
@@ -101,6 +101,8 @@ namespace GameJam
                     this.GetComponent<NavMeshObstacle>().enabled = true;
                 }, this.dashDuration);
             }
+
+            this.scientist.Animator.SetBool("IsMoving", !this.dashing && this.rb.velocity.magnitude > 0.1f);
         }
         
         private void ProcessAimingAngle(Vector2 mousePosition)

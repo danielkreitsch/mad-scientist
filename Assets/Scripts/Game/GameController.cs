@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Development.Debugging;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -20,6 +22,12 @@ namespace GameJam
 
         [SerializeField]
         private AudioClip gameOverSound;
+
+        [SerializeField]
+        private TextMeshProUGUI timeLabel;
+        
+        [SerializeField]
+        private TextMeshProUGUI bigTimeLabel;
 
         private float time = 0;
         private bool gameOver = false;
@@ -64,8 +72,10 @@ namespace GameJam
             {
                 return;
             }
-            
+
             time += UnityEngine.Time.deltaTime;
+
+            this.timeLabel.text = (Mathf.RoundToInt(this.time) / 60).ToString().PadLeft(2, '0') + ":" + (Mathf.RoundToInt(this.time) % 60).ToString().PadLeft(2, '0');
 
             if (time > 3 && this.Scientists.Count == 0 && GameObject.FindObjectOfType<Scientist>() == null)
             {
@@ -78,6 +88,9 @@ namespace GameJam
         {
             this.musicPlayer.Stop();
             this.GetComponent<AudioSource>().PlayOneShot(this.gameOverSound);
+            this.bigTimeLabel.text = this.timeLabel.text;
+            this.bigTimeLabel.gameObject.SetActive(true);
+            this.timeLabel.gameObject.SetActive(false);
             yield return new WaitForSeconds(5);
             SceneManager.LoadScene(0);
         }

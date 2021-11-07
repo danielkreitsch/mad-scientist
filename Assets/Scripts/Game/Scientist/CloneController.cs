@@ -148,6 +148,8 @@ namespace Game.Character
             {
                 this.rotatingTransform.rotation = MathUtilty.SmoothDampQuaternion(this.rotatingTransform.rotation, Quaternion.LookRotation(this.navMeshAgent.velocity), ref this.rotationVelocity, this.rotationInterpolationTime);
             }
+            
+            this.scientist.Animator.SetBool("IsMoving", this.navMeshAgent.velocity.magnitude > 0.1f);
         }
 
         private float GetOptimalDistance()

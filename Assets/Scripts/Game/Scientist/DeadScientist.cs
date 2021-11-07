@@ -11,7 +11,7 @@ public class DeadScientist : MonoBehaviour
 {
     [Inject]
     private GameController gameController;
-    
+
     private void OnEnable()
     {
         // Deactivate zombie components
@@ -24,10 +24,10 @@ public class DeadScientist : MonoBehaviour
             this.GetComponent<CloneController>().enabled = false;
             this.GetComponent<NavMeshAgent>().enabled = false;
         }
-        
+
         // Change layer
         this.gameObject.layer = LayerMask.NameToLayer("DeadBody");
-        
+
         // Later: Turn into ragdoll
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         this.GetComponent<Rigidbody>().isKinematic = false;
@@ -42,13 +42,14 @@ public class DeadScientist : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (this.GetComponent<PlayerController>() != null)
         {
-            if (this.gameController.Scientists.Count >= 2)
+            var otherScientist = this.gameController.Scientists.FindAll(s => s != this.GetComponent<Scientist>() && s.IsAlive).FirstOrDefault();
+            if (otherScientist != null)
             {
-                var otherScientist = this.gameController.Scientists.FindAll(s => s != this.GetComponent<Scientist>()).First();
-                GameObject.Instantiate(this.gameController.PlayerPrefab, otherScientist.transform.position, Quaternion.identity);
+                var newPlayerObj = GameObject.Instantiate(this.gameController.PlayerPrefab, otherScientist.transform.position, Quaternion.identity);
+                newPlayerObj.GetComponent<Scientist>().Health = otherScientist.Health;
                 GameObject.Destroy(otherScientist.gameObject);
             }
-            
+
             GameObject.Destroy(this.gameObject);
         }
         else if (this.GetComponent<CloneController>() != null)

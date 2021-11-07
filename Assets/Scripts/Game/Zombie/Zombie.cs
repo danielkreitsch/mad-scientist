@@ -71,7 +71,7 @@ public class Zombie : MonoBehaviour
             
             this.StartCoroutine(this.Blink_Coroutine(0.05f));
 
-            if (shooter.GetComponent<PlayerController>() != null)
+            if (shooter != null && shooter.gameObject.activeInHierarchy && shooter.GetComponent<PlayerController>() != null)
             {
                 this.GetComponent<ZombieController>().Target = shooter;
                 //Debug.Log("Shot by player");
