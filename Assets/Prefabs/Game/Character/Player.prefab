@@ -476,7 +476,7 @@ MonoBehaviour:
   bulletBlockingLayers:
     serializedVersion: 2
     m_Bits: 0
-  shootCooldown: 0.7
+  shootCooldown: 0.15
 --- !u!114 &3786117728502693006
 MonoBehaviour:
   m_ObjectHideFlags: 0
