@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: 7c3461f0c23ecc744ba0d07a052179d6
+guid: 7d023c51fb1c3cf4698cce29e47edf5a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Biomass
-    second: {fileID: 2100000, guid: e0b954aaaa29a3f46b6a483064c919e6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: cables.008
-    second: {fileID: 2100000, guid: c0cf81a51a2ba62469088e76d2d53d9d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: tank-nonglass.014
-    second: {fileID: 2100000, guid: 79c686ba11d8178449b7a8200563653a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

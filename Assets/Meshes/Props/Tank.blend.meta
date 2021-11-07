@@ -1,9 +1,49 @@
 fileFormatVersion: 2
-guid: 3cf1ac5baa4518444bf4c1a8b62dfb18
+guid: 635d8cec13d39c64c94dc472927f1444
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: b43df23919b084e4b9ddb802f9094327, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cables
+    second: {fileID: 2100000, guid: c0cf81a51a2ba62469088e76d2d53d9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tank-nonglass
+    second: {fileID: 2100000, guid: c9d626e423e177b49ba39a30ccf5a2d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tank-nonglass.002
+    second: {fileID: 2100000, guid: c9d626e423e177b49ba39a30ccf5a2d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tank-nonglass.003
+    second: {fileID: 2100000, guid: c9d626e423e177b49ba39a30ccf5a2d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tank-nonglass.004
+    second: {fileID: 2100000, guid: c9d626e423e177b49ba39a30ccf5a2d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tankgrey
+    second: {fileID: 2100000, guid: cf18eac326ad6014fbc02b6b7f1d9c50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tankwhite
+    second: {fileID: 2100000, guid: eb9de0bc033f9ae4eb40d89b9974edee, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,7 +74,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 1.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -65,13 +105,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 180
+    normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 0
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 1
+    normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
   humanDescription:
@@ -85,7 +125,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 1.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
