@@ -13,7 +13,11 @@ namespace GameJam
         [SerializeField]
         private GameObject playerPrefab;
 
+        private float time = 0;
+
         public GameObject PlayerPrefab => this.playerPrefab;
+
+        public float Time => this.time;
 
         public List<Scientist> Scientists { get; } = new List<Scientist>();
         
@@ -43,6 +47,11 @@ namespace GameJam
                 }
             }
             return attackers;
+        }
+
+        private void Update()
+        {
+            time += UnityEngine.Time.deltaTime;
         }
     }
 }

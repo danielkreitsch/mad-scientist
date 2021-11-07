@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameJam;
 using UnityEngine;
+using Zenject;
 
 public class ZombieSpawner : MonoBehaviour
 {
+    [Inject]
+    private GameController gameController;
+    
     [SerializeField]
     private GameObject zombiePrefab;
     
     [SerializeField]
-    private float spawnCooldown = 5;
+    private AnimationCurve spawnCooldownByTime;
     
     private float spawnTimer = 100;
     
@@ -16,7 +21,7 @@ public class ZombieSpawner : MonoBehaviour
     {
         this.spawnTimer += Time.deltaTime;
 
-        if (this.spawnTimer > this.spawnCooldown)
+        if (this.spawnTimer > this.spawnCooldownByTime.Evaluate(this.gameController.Time / 60))
         {
             this.spawnTimer = 0;
             this.SpawnZombie();

@@ -27,13 +27,16 @@ namespace GameJam
 
         [SerializeField]
         private Scientist scientist;
-        
+
         [SerializeField]
         private LayerMask aimLayer;
 
         [SerializeField]
+        private Transform rotatingTransform;
+
+        [SerializeField]
         private float walkSpeed = 5;
-        
+
         private CharacterController characterController;
 
         void Awake()
@@ -78,7 +81,7 @@ namespace GameJam
             if (Physics.Raycast(ray, out RaycastHit hit, 100, this.aimLayer))
             {
                 var mousePositionInWorld = hit.point;
-                this.transform.LookAt(new Vector3(mousePositionInWorld.x, this.transform.position.y, mousePositionInWorld.z));
+                this.rotatingTransform.LookAt(new Vector3(mousePositionInWorld.x, this.transform.position.y, mousePositionInWorld.z));
             }
         }
 

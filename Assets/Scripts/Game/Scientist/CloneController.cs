@@ -15,6 +15,9 @@ namespace Game.Character
 
         [Inject]
         private GameController gameController;
+        
+        [SerializeField]
+        private Transform rotatingTransform;
 
         [SerializeField]
         private bool distanceOptimizationEnabled;

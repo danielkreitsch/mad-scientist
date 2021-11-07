@@ -17,6 +17,9 @@ namespace GameJam
             this.GetComponent<ZombieController>().enabled = false;
             this.GetComponent<NavMeshAgent>().enabled = false;
             
+            // Change layer
+            this.gameObject.layer = LayerMask.NameToLayer("DeadBody");
+                            
             // Later: Turn into ragdoll
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             this.GetComponent<Rigidbody>().isKinematic = false;

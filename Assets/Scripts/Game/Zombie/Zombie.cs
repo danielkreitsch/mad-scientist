@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using GameJam;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 using Zenject;
 
@@ -10,7 +12,13 @@ public class Zombie : MonoBehaviour
     private GameController gameController;
 
     [SerializeField]
-    private float startHealth = 10;
+    private Transform rotatingTransform;
+
+    [SerializeField]
+    private Image healthBarFillImage;
+    
+    [SerializeField]
+    private float maxHealth = 10;
 
     [SerializeField]
     private float torqueByBulletFactor = 1;
@@ -26,7 +34,7 @@ public class Zombie : MonoBehaviour
 
     private void Start()
     {
-        this.health = this.startHealth;
+        this.health = this.maxHealth;
         this.biomass = this.health / 10;
     }
 
@@ -41,6 +49,11 @@ public class Zombie : MonoBehaviour
     private void OnDisable()
     {
         this.gameController.Zombies.Remove(this);
+    }
+
+    private void Update()
+    {
+        this.healthBarFillImage.fillAmount = this.health / this.maxHealth;
     }
 
     public void ReceiveShootDamage(float damage, Vector3 direction, Scientist shooter)
@@ -59,6 +72,7 @@ public class Zombie : MonoBehaviour
         else
         {
             this.GetComponent<DeadZombie>().enabled = true;
+            this.healthBarFillImage.transform.parent.gameObject.SetActive(false);
             this.GetComponent<Rigidbody>().AddTorque(direction * torqueByBulletFactor);
         }
     }

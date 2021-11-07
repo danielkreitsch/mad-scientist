@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GameJam;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -11,14 +12,29 @@ public class Scientist : MonoBehaviour
 {
     [Inject]
     private GameController gameController;
+
+    [Inject]
+    private CameraController cameraController;
     
     [SerializeField]
     private Animator animator;
 
     [SerializeField]
-    private float startHealth = 10;
+    private Image healthBarFillImage;
+    
+    [SerializeField]
+    private float maxHealth = 10;
+    
+    [SerializeField]
+    private int maxAmmo = 100;
+
+    [SerializeField]
+    private float ammoReloadTime;
 
     [Header("Shooting")]
+    [SerializeField]
+    private Transform rotatingTransform;
+    
     [SerializeField]
     private GameObject bulletPrefab;
     
@@ -32,9 +48,11 @@ public class Scientist : MonoBehaviour
     private float shootCooldown = 0.2f;
 
     private float health = 0;
+    private int ammo = 0;
 
-    private float shootTimer;
-    
+    private float shootTimer = 0;
+    private float ammoReloadTimer = 0;
+
     public float Health => this.health;
     
     public bool IsAlive => health > 0;
@@ -45,7 +63,8 @@ public class Scientist : MonoBehaviour
 
     private void Start()
     {
-        this.health = this.startHealth;
+        this.health = this.maxHealth;
+        this.ammo = this.maxAmmo;
     }
 
     private void OnEnable()
@@ -64,17 +83,36 @@ public class Scientist : MonoBehaviour
     private void Update()
     {
         this.shootTimer += Time.deltaTime;
+
+        if (this.ammo <= 0)
+        {
+            this.ammoReloadTimer += Time.deltaTime;
+            if (this.ammoReloadTimer > this.ammoReloadTime)
+            {
+                this.ammoReloadTimer = 0;
+                this.ammo = this.maxAmmo;
+            }
+        }
+        
+        this.healthBarFillImage.fillAmount = this.health / this.maxHealth;
     }
 
     public void Shoot()
     {
         if (this.shootTimer >= this.shootCooldown)
         {
-            GameObject bulletObj = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawn.position, Quaternion.Euler(0, this.transform.eulerAngles.y + Random.Range(-6f, 6f), 0));
+            this.shootTimer = 0;
+            
+            if (this.ammo <= 0)
+            {
+                return;
+            }
+            
+            GameObject bulletObj = GameObject.Instantiate(this.bulletPrefab, this.bulletSpawn.position, Quaternion.Euler(0, this.rotatingTransform.eulerAngles.y + Random.Range(-6f, 6f), 0));
             Bullet bullet = bulletObj.GetComponent<Bullet>();
             bullet.Shooter = this;
-            
-            this.shootTimer = 0;
+
+            this.ammo--;
         }
     }
 
@@ -84,7 +122,7 @@ public class Scientist : MonoBehaviour
         {
             if (!Physics.Raycast(this.transform.position, (this.AttackTarget.transform.position - this.transform.position).normalized, Vector3.Distance(this.transform.position, this.AttackTarget.transform.position), this.bulletBlockingLayers))
             {
-                this.transform.LookAt(targetPosition);
+                this.rotatingTransform.LookAt(targetPosition);
                 this.Shoot();
             }
         }
@@ -97,6 +135,7 @@ public class Scientist : MonoBehaviour
         if (this.health <= 0)
         {
             this.GetComponent<DeadScientist>().enabled = true;
+            this.healthBarFillImage.transform.parent.gameObject.SetActive(false);
         }
     }
 }

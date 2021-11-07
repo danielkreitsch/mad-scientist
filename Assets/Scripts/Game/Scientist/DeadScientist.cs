@@ -42,7 +42,7 @@ public class DeadScientist : MonoBehaviour
             if (this.gameController.Scientists.Count >= 2)
             {
                 var otherScientist = this.gameController.Scientists.FindAll(s => s != this.GetComponent<Scientist>()).First();
-                GameObject.Instantiate(this.gameController.PlayerPrefab, otherScientist.transform.position, otherScientist.transform.rotation);
+                GameObject.Instantiate(this.gameController.PlayerPrefab, otherScientist.transform.position, Quaternion.identity);
                 GameObject.Destroy(otherScientist.gameObject);
             }
             
