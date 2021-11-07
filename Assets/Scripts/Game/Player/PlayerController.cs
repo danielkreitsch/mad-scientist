@@ -62,7 +62,7 @@ namespace GameJam
             
             this.ProcessMovement(movementInput.x, movementInput.y);
             
-            this.ProcessLookDirection(Mouse.current.position.ReadValue());
+            this.ProcessAimingAngle(Mouse.current.position.ReadValue());
             
             this.ProcessShooting(Input.GetMouseButton(0));
 
@@ -82,6 +82,7 @@ namespace GameJam
                 var verticalInputInWorld = horizontalInput * -sinOfCameraAngle + verticalInput * cosOfCameraAngle;
                 var walkDirection = new Vector3(horizontalInputInWorld, 0, verticalInputInWorld).normalized;
                 this.rb.velocity = walkDirection * walkSpeed;
+                this.rotatingTransform.rotation = Quaternion.LookRotation(walkDirection);
             }
 
             if (this.playerControls.Default.Dodge.triggered)
@@ -100,13 +101,14 @@ namespace GameJam
             }
         }
         
-        private void ProcessLookDirection(Vector2 mousePosition)
+        private void ProcessAimingAngle(Vector2 mousePosition)
         {
             Ray ray = this.cameraController.Camera.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100, this.aimLayer))
             {
                 var mousePositionInWorld = hit.point;
-                this.rotatingTransform.LookAt(new Vector3(mousePositionInWorld.x, this.transform.position.y, mousePositionInWorld.z));
+                this.scientist.AimingAngle = Vector3.SignedAngle(Vector3.forward, new Vector3(mousePositionInWorld.x, this.transform.position.y, mousePositionInWorld.z) - this.transform.position, Vector3.up);
+                this.debugScreen.Set("Player", "Aiming Angle", this.scientist.AimingAngle);
             }
         }
 
