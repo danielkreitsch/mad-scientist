@@ -306,7 +306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &365153965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1037,8 +1037,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -82.95734}
-  m_SizeDelta: {x: -100, y: -265.9147}
+  m_AnchoredPosition: {x: 0, y: -24.999992}
+  m_SizeDelta: {x: -100, y: -150.00002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702837512
 MonoBehaviour:
@@ -1060,20 +1060,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "To solve the zombie outbreak, the government sent corpses to me for research.
-    \nThey tried to find the reason for the outbreak, the half death state of their
-    former\nhuman companions. When researching the changes of biological data, I
-    managed to find\na mass of unknown cells, probably left from the virus. The mass
-    was capable of duplicating\nother cells. I figured, that it was probably the
-    way how the virus managed to spread that\nfar, through actively duplicating infected
-    cells it can change a person within a short time.\nIt can only be found in zombies
-    after they died, the amount varies due the conversion speed\nof the virus.\r\n\r\nI
-    continued to research this mass, while duplicating my own cells through it.\nCuriosity
-    caught me and I continued on how detailed my cells can be copied. \r\nUntil I
-    managed to create an exact clone of myself with enough mass collected.\nIt was
-    like having a safety copy of myself and my genious.\r\n\r\nToday is not my last
-    day but I there is no time to explain further.\nPlease find attached my whole
-    research.\n\nI'm not sure if my duplicate will be as smart as I am.\n"
+  m_text: "To solve the zombie outbreak, the government sent corpses to their smartest
+    scientists for research. They tried to find the reason for the outbreak, the
+    half death state of their former human companions. When researching the changes
+    of biological data, they managed to find a mass of unknown cells, probably left
+    from the Virus. The mass was capable of duplicating other cells. The researchers
+    figured, that it was probably the way how the virus managed to spread that far,
+    through actively duplicating infected cells it can change a person within a short
+    time. It can only be found in Zombies after they died, the amount varies due
+    the conversion speed of the virus.\r\n\r\nA scientist continued to research this
+    mass, while duplicating his own cells through it. Curiosity caught him and he
+    continued on how detailed his cells can be copied. \r\nUntil he managed to create
+    an exact clone of himself with enough mass collected. It was like having a safety
+    copy of himself.\r\n\r\nSoon after an accident happened. An explosion.... It
+    marked the start of their fight to survival."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
   m_sharedMaterial: {fileID: -7046006204846478257, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 2136576411}
   - component: {fileID: 2136576410}
   m_Layer: 5
-  m_Name: Press Enter
+  m_Name: PressKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press <Enter> to send
+  m_text: Press <Any Key>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}
   m_sharedMaterial: {fileID: -7046006204846478257, guid: 9e752c62051b8be49b3db1f6d507031e, type: 2}

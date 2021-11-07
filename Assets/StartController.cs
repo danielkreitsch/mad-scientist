@@ -64,7 +64,7 @@ public class StartController : MonoBehaviour
                 }
             }
             
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.anyKeyDown)
             {
                 this.content.text = this.finalText;
                 this.typing = false;
@@ -74,14 +74,14 @@ public class StartController : MonoBehaviour
         {
             this.blinkTimer += Time.deltaTime;
 
-            if (this.blinkTimer > 0.5f)
+            if (this.blinkTimer > 0.4f)
             {
                 this.blinkTimer = 0;
                 
                 this.continueHint.SetActive(!this.continueHint.activeInHierarchy);
             }
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.anyKeyDown)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
