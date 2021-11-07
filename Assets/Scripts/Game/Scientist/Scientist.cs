@@ -145,7 +145,8 @@ public class Scientist : MonoBehaviour
         {
             if (!Physics.Raycast(this.transform.position, (this.AttackTarget.transform.position - this.transform.position).normalized, Vector3.Distance(this.transform.position, this.AttackTarget.transform.position), this.bulletBlockingLayers))
             {
-                this.rotatingTransform.LookAt(targetPosition);
+                this.AimingAngle = Vector3.SignedAngle(Vector3.forward, new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z) - this.transform.position, Vector3.up);
+                //this.rotatingTransform.LookAt(targetPosition);
                 this.Shoot();
             }
         }

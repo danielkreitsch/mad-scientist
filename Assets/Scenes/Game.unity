@@ -72111,7 +72111,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1362597672
 Transform:
   m_ObjectHideFlags: 0
@@ -109837,6 +109837,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1267544345}
     m_Modifications:
+    - target: {fileID: 2297266594476499141, guid: 9032e9b0b7df9f04dba519d2770520b1, type: 3}
+      propertyPath: requiredBiomassForClone
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2297266594476499143, guid: 9032e9b0b7df9f04dba519d2770520b1, type: 3}
       propertyPath: m_RootOrder
       value: 3
