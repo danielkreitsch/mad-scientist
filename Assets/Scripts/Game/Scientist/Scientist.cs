@@ -97,6 +97,8 @@ public class Scientist : MonoBehaviour
         }
         
         this.healthBarFillImage.fillAmount = this.health / this.maxHealth;
+
+        this.animator.SetFloat("AimAngle", this.AimingAngle - this.rotatingTransform.eulerAngles.y);
     }
 
     public void Shoot()

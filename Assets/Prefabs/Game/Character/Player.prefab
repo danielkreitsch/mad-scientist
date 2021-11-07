@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd31cbc19ff9c418325fdc691b8612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 6428594459485173676}
   healthBarFillImage: {fileID: 10757431}
   maxHealth: 10
   maxAmmo: 50
@@ -607,5 +607,10 @@ PrefabInstance:
 --- !u!4 &1141337382148484566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73081e45cec4d22468b5ed2d7b587ecd, type: 3}
+  m_PrefabInstance: {fileID: 602463309776079421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6428594459485173676 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 73081e45cec4d22468b5ed2d7b587ecd, type: 3}
   m_PrefabInstance: {fileID: 602463309776079421}
   m_PrefabAsset: {fileID: 0}
