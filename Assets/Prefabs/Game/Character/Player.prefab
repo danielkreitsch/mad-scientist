@@ -358,7 +358,7 @@ MonoBehaviour:
   animator: {fileID: 6428594459485173676}
   healthBarObject: {fileID: 734199708}
   healthBarFillImage: {fileID: 10757431}
-  maxHealth: 100
+  maxHealth: 50
   maxAmmo: 30
   ammoReloadTime: 2
   rotatingTransform: {fileID: 1696416451753878228}

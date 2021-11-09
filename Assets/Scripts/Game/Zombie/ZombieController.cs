@@ -36,6 +36,9 @@ namespace GameJam
         [SerializeField]
         private float rotationInterpolationTime = 1;
 
+        [SerializeField]
+        private AudioClip attackSound;
+
         private Zombie zombie;
         private NavMeshAgent navMeshAgent;
 

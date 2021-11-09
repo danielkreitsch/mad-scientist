@@ -28,6 +28,9 @@ public class Zombie : MonoBehaviour
 
     private float health = 0;
     private float biomass = 0;
+    
+    [SerializeField]
+    private AudioClip deathSound;
 
     public bool IsAlive => this.health > 0;
 
@@ -83,6 +86,7 @@ public class Zombie : MonoBehaviour
             this.healthBarObject.SetActive(false);
             this.GetComponent<Rigidbody>().AddTorque(direction * torqueByBulletFactor);
             this.GetComponentInChildren<Animator>().enabled = false;
+            this.GetComponent<AudioSource>().PlayOneShot(this.deathSound);
         }
     }
 

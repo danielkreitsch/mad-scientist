@@ -21,5 +21,13 @@ namespace GameJam
         {
             this.audioSource.Stop();
         }
+
+        private void Update()
+        {
+            if (!this.audioSource.isPlaying)
+            {
+                this.audioSource.Play();
+            }
+        }
     }
 }

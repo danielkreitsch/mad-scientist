@@ -1,10 +1,7 @@
 using Development.Debugging;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.Serialization;
 using Utility;
 using Zenject;
 
@@ -87,7 +84,7 @@ namespace GameJam
                 this.rb.velocity -= this.rb.velocity * 10 * Time.deltaTime;
             }
 
-            if (this.playerControls.Default.Dodge.triggered)
+            /*if (this.playerControls.Default.Dodge.triggered)
             {
                 this.rb.velocity = Vector3.zero;
                 this.rb.AddForce(new Vector3(0, this.scientist.AimingAngle, 0) * this.dashForce, ForceMode.Impulse);
@@ -100,7 +97,7 @@ namespace GameJam
                     this.gameObject.layer = LayerMask.NameToLayer("Scientist");
                     this.GetComponent<NavMeshObstacle>().enabled = true;
                 }, this.dashDuration);
-            }
+            }*/
 
             this.scientist.Animator.SetBool("IsMoving", !this.dashing && this.rb.velocity.magnitude > 0.1f);
         }
