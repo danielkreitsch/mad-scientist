@@ -80,12 +80,12 @@ public class Tank : MonoBehaviour
             {
                 this.Biomass = this.requiredBiomassForClone;
                 this.brightWaterTransform.gameObject.SetActive(true);
-                Debug.Log("A new clone is waiting (Voice?)");
+                Debug.Log("A new clone is waiting");
             }
         }
         else
         {
-            Debug.Log("You should go to the tank (Voice?)");
+            Debug.Log("You should go to the tank");
         }
     }
 

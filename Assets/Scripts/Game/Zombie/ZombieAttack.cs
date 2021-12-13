@@ -24,7 +24,6 @@ public class ZombieAttack : MonoBehaviour
         {
             scientist.ReceiveDamageByAttack(1);
             this.attackUsed = true;
-            Debug.Log("Hit scientist");
         }
     }
 }

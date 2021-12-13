@@ -77,7 +77,6 @@ public class Zombie : MonoBehaviour
             if (shooter != null && shooter.gameObject.activeInHierarchy && shooter.GetComponent<PlayerController>() != null)
             {
                 this.GetComponent<ZombieController>().Target = shooter;
-                //Debug.Log("Shot by player");
             }
         }
         else
@@ -109,7 +108,6 @@ public class Zombie : MonoBehaviour
             {
                 renderer.transform.localScale = renderer.transform.localScale / 1.15f;
             }
-            //renderer.enabled = visible;
         }
     }
 }

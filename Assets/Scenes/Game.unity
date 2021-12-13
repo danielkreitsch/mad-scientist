@@ -118099,6 +118099,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1267544345}
     m_Modifications:
+    - target: {fileID: 2297266594476499140, guid: 9032e9b0b7df9f04dba519d2770520b1, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2297266594476499141, guid: 9032e9b0b7df9f04dba519d2770520b1, type: 3}
       propertyPath: requiredBiomassForClone
       value: 20

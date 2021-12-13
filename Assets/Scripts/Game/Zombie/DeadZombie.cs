@@ -38,12 +38,12 @@ namespace GameJam
 
             if (!this.tank.IsFull)
             {
-                GameObject biomassObj = GameObject.Instantiate(this.biomassPrefab, this.transform.position, Quaternion.identity);
+                GameObject biomassObj = Instantiate(this.biomassPrefab, this.transform.position, Quaternion.identity);
                 biomassObj.GetComponent<FlyingBiomass>().Amount = this.GetComponent<Zombie>().Biomass;
             }
 
             yield return new WaitForSeconds(5f);
-            GameObject.Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

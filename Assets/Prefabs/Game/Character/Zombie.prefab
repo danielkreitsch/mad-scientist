@@ -490,7 +490,7 @@ MonoBehaviour:
   healthBarFillImage: {fileID: 2120549847958666300}
   maxHealth: 10
   torqueByBulletFactor: 5
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 30e491c0068a2e44dbfd515eb8babc4d, type: 3}
 --- !u!114 &8261111631661212822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,7 +643,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
