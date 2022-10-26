@@ -7,9 +7,9 @@ You play a mad scientist whose highest priority is to keep his genius alive at a
 Download: [creamcheesegames.itch.io/mad-scientist](https://creamcheesegames.itch.io/mad-scientist)
 
 ### Controls
-- Move: WASD
-- Shoot: Left Mouse
-- Interact: E
+- **Move**: WASD
+- **Shoot**: Left Mouse
+- **Interact**: E
 
 ### Credits
 
