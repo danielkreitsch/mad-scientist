@@ -10,3 +10,12 @@ Download: [creamcheesegames.itch.io/mad-scientist](https://creamcheesegames.itch
 - Move: WASD
 - Shoot: Left Mouse
 - Interact: E
+
+### Credits
+
+- **Glowdragon**: Programming, Visual Effects
+- **Neqiro**: Game Design, 3D Art, Animation
+- **Seppel**: 3D Art
+- **Arekuza**: Music, Sound Effects
+- **Tsumi**: Story, QA
+- **blocki**: Visual Effects
